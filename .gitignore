@@ -1,0 +1,25 @@
+# Hermes Backup Repository - .gitignore
+# This file prevents sensitive data from being accidentally committed
+
+# Conversation history and session state (SENSITIVE - do not backup to public repo)
+state.db
+state.db-shm
+state.db-wal
+state.db.auto-maintenance.lock
+state.db.fts_rebuild.lock
+shared-state.db
+
+# Cron job outputs (may contain scraped data, personal information, etc)
+cron/output/
+
+# Local testing/temp files
+.DS_Store
+*.swp
+*.swo
+*~
+.env.local
+
+# Lock files (auto-generated)
+cron/.fire-*.lock
+cron/.jobs.lock
+cron/.tick.lock
