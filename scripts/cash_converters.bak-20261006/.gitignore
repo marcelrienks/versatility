@@ -1,5 +1,0 @@
-__pycache__/
-*.pyc
-data/results/*.json
-data/pending_matches.jsonl
-data/sent_products.json
