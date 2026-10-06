@@ -26,11 +26,20 @@ All Hermes skills are backed up in `skills/` directory. See [Skills Inventory](#
   - Job execution logs in `cron/output/`
   - Job database and configuration in `cron/jobs.json`
 
-### Session State (Optional)
+### Session State (⚠️ Explicitly Excluded for Privacy)
 
-- **`state.db`** — Conversation history and session state
-- **`state.db-shm`, `state.db-wal`** — SQLite write-ahead log files
-- **`shared-state.db`** — Shared state database
+⚠️ **NOT BACKED UP by default** — These files contain sensitive personal data:
+- **`state.db`** — Conversation history (628+ messages) — ❌ EXCLUDED
+- **`state.db-shm`, `state.db-wal`** — SQLite write-ahead log files — ❌ EXCLUDED
+- **`shared-state.db`** — Session state — ❌ EXCLUDED
+- **`cron/output/`** — Automation job results (may contain personal data) — ❌ EXCLUDED
+
+These files are **NOT needed for restoration** and contain:
+- Private conversation history with Claude
+- Personal queries and thoughts
+- Automation results with scraped/sensitive data
+
+They should only be backed up to **private/local storage**, never to public repositories.
 
 ## 🚀 Restoring This Backup
 
@@ -90,6 +99,29 @@ hermes-restore-from-github
 ```
 
 ## 🔐 Security & Encryption
+
+### What's NOT in This Backup (By Design)
+
+To protect your privacy, the following sensitive files are **explicitly excluded**:
+
+| File | Reason | Data |
+|------|--------|------|
+| `state.db*` | Private conversations | 628+ messages with Claude |
+| `shared-state.db` | Session state | User interaction history |
+| `cron/output/` | Scraped/automation results | Personal data from automated jobs |
+
+**Why excluded?**
+- ✅ Not needed for restoration
+- ✅ Contain personal/private data
+- ✅ Should only be in private backups
+- ✅ Repository is public (even with private GH repo, be cautious)
+
+**If you need to backup conversations:**
+- Use a separate **private** GitHub repo
+- Or backup locally to encrypted storage
+- Never mix conversation history with public code/config backups
+
+**See `.gitignore`** for the complete list of excluded files.
 
 ### Vault Encryption
 
