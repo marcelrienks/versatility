@@ -102,14 +102,14 @@
     "first_seen_at": null,
     "last_patched_at": "2026-10-06T10:48:06.039630+00:00",
     "last_reused_patch_generation": 2,
-    "last_used_at": "2026-10-06T10:51:15.935527+00:00",
-    "last_viewed_at": "2026-10-06T10:51:15.931498+00:00",
+    "last_used_at": "2026-10-06T11:02:15.143656+00:00",
+    "last_viewed_at": "2026-10-06T11:02:15.140600+00:00",
     "patch_count": 2,
     "patch_generation": 2,
     "pinned": false,
     "state": "active",
-    "use_count": 2,
-    "view_count": 2
+    "use_count": 5,
+    "view_count": 5
   },
   "hermes-identity-configuration": {
     "archived_at": null,
@@ -134,14 +134,14 @@
     "first_seen_at": null,
     "last_patched_at": "2026-10-06T10:48:06.010192+00:00",
     "last_reused_patch_generation": 1,
-    "last_used_at": "2026-10-06T10:51:15.933604+00:00",
-    "last_viewed_at": "2026-10-06T10:51:15.929070+00:00",
+    "last_used_at": "2026-10-06T11:02:15.149607+00:00",
+    "last_viewed_at": "2026-10-06T11:02:15.145970+00:00",
     "patch_count": 1,
     "patch_generation": 1,
     "pinned": false,
     "state": "active",
-    "use_count": 2,
-    "view_count": 2
+    "use_count": 4,
+    "view_count": 4
   },
   "project-structure-cleanup": {
     "archived_at": null,
