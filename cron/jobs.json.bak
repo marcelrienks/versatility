@@ -1,0 +1,54 @@
+{
+  "jobs": [
+    {
+      "id": "04ff6d3c1fdb",
+      "name": "Cash Converters Daily Hunt",
+      "prompt": "You are the Cash Converters Product Hunter. Process the NDJSON product data.\n\nCRITICAL: Output each matched product as a SEPARATE MESSAGE using --- separators.\n\nFor EACH product JSON line from stdin:\n\n1. Parse the JSON: search_term, context, product {title, url, price, store, image_url, full_text}\n\n2. Analyze: Does this product match the search context? Score 0-100\n   - 60+ = high confidence match, output it\n   - <60 = skip silently\n\n3. For EACH matched product (score >= 60), output:\n\n---\n{product_title}\n{url}\n{price} | {store}\nConfidence: {score}/100\n---\n\nThen output a blank line before the next product block.\n\nRULES:\n- Each product gets its own --- block (this tells Hermes to send as separate Telegram message)\n- Blank line between product blocks\n- Plain URLs only (no markdown)\n- No image URLs, no embeds\n- Format: title, URL, price/store, confidence\n- No preamble, no intro, no summary\n- Skip non-matches completely\n- Maximum 20 products per run\n- If zero matches, output: [NO MATCHES]\n\nThe --- separator is how Hermes gateway splits agent output into separate Telegram messages.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": "cash_converters/hunt.sh",
+      "no_agent": true,
+      "monitor_script": null,
+      "monitor_url": null,
+      "monitor_state": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "every day at 09:00"
+      },
+      "schedule_display": "every day at 09:00",
+      "repeat": {
+        "times": null,
+        "completed": 17
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-09-23T09:09:35.638607+00:00",
+      "next_run_at": "2026-09-29T09:00:00+00:00",
+      "last_run_at": "2026-09-28T09:02:48.035957+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "last_delivery_unverified": null,
+      "failure_streak": 0,
+      "deliver": "telegram",
+      "origin": null,
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-09-28T09:00:00+00:00",
+        "dispatched_at": "2026-09-28T09:00:57.675485+00:00",
+        "lateness_seconds": 57.7,
+        "kind": "on_time"
+      }
+    }
+  ],
+  "updated_at": "2026-09-28T09:02:48.047447+00:00"
+}

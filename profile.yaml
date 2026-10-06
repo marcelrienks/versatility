@@ -1,0 +1,11 @@
+ui_meta:
+  hermes-bots:
+    shape: squircle
+    color: '#8b5cf6'
+    imageKind: photo
+    title: echo
+    custom: true
+_ui_meta_revisions:
+  hermes-bots: 8
+description: remote assistant
+description_auto: false

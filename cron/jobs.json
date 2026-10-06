@@ -1,0 +1,54 @@
+{
+  "jobs": [
+    {
+      "id": "04ff6d3c1fdb",
+      "name": "Cash Converters Daily Hunt",
+      "prompt": "The script phase (orchestrator.py) has already run and its NDJSON output (one scraped product per line, with search_term/context/products) is in your context. Do the following yourself — do NOT use execute_code, terminal, or send_message (all are blocked/unavailable in this cron session; don't waste turns on them).\n\nSTEP 1 — Score:\nFor each product across all search_term groups, score 0-100 how well it matches that search_term's context (price reasonable for secondhand, condition acceptable, matches search intent). Discard anything scoring below 60.\n\nSTEP 2 — Dedup against the ledger:\nUse read_file to read data/sent_products.json inside ~/.hermes/scripts/cash_converters/ (relative to the script's working directory — use the absolute path if read_file needs one: /home/opc/.hermes/scripts/cash_converters/data/sent_products.json). It is a JSON object keyed by product_id, each value like {\"product_id\", \"title\", \"price\", \"url\", \"sent_at\", \"search_terms\"}. If the file doesn't exist or is empty, treat the ledger as {}.\n\nFor each product that scored >= 60, extract its product_id (same id the scraper already attaches to each product entry). Classify:\n- NEW: product_id not in the ledger.\n- PRICE_CHANGE: product_id in the ledger AND current price differs from ledger's stored price.\n- DUPLICATE: product_id in the ledger AND price is unchanged. Drop these silently — do not include in output, do not re-send.\n\nSTEP 3 — Update the ledger:\nBuild the updated ledger = old ledger with every NEW/PRICE_CHANGE product's entry added/overwritten: {\"product_id\": ..., \"title\": ..., \"price\": ..., \"url\": ..., \"sent_at\": \"<current ISO timestamp>\", \"search_terms\": [search_term]}. Leave all untouched/duplicate entries exactly as they were. Use write_file to save the complete merged JSON back to /home/opc/.hermes/scripts/cash_converters/data/sent_products.json (pretty-printed, valid JSON, same shape as before — this file is read by future runs, a malformed write breaks dedup for every subsequent day, so double check it is valid JSON before writing).\n\nSTEP 4 — Format the final response:\nYour FINAL response message must contain ONLY the formatted blocks below, nothing else (no preamble, no summary, no markdown headers) — it is sent verbatim to Telegram and a splitter looks for the literal separator line \"---\" between blocks.\n\nFor each NEW or PRICE_CHANGE product (score >= 60), emit a block in this exact shape:\n\nFor a NEW product:\n{title}\n{url}\n{price} | {store}\nConfidence: {score}/100\n\nFor a PRICE_CHANGE product:\n🔔 PRICE UPDATE\n{title}\n{url}\nPrevious: {previous_price} -> NEW: {price} | {store}\nConfidence: {score}/100\n\nJoin multiple blocks with a line containing exactly: ---\n(i.e. separate blocks with a blank line, then \"---\", then a blank line)\n\nIf there are ZERO matching NEW/PRICE_CHANGE products after dedup (everything was a duplicate, or nothing scored >= 60), your final response must be completely empty (no text at all) — do not send a \"nothing to report\" message.\n\nDo not include image_url or embed any images. Do not output anything else before, between, or after the blocks.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": "cash_converters/run_scrape.sh",
+      "no_agent": false,
+      "monitor_script": null,
+      "monitor_url": null,
+      "monitor_state": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "every day at 09:00"
+      },
+      "schedule_display": "every day at 09:00",
+      "repeat": {
+        "times": null,
+        "completed": 33
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-09-23T09:09:35.638607+00:00",
+      "next_run_at": "2026-10-07T09:00:00+00:00",
+      "last_run_at": "2026-10-06T10:32:16.643667+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "last_delivery_unverified": null,
+      "failure_streak": 0,
+      "deliver": "telegram",
+      "origin": null,
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null,
+      "last_dispatch": {
+        "scheduled_at": "2026-10-06T09:00:00+00:00",
+        "dispatched_at": "2026-10-06T09:00:58.288598+00:00",
+        "lateness_seconds": 58.3,
+        "kind": "on_time"
+      }
+    }
+  ],
+  "updated_at": "2026-10-06T10:32:16.644679+00:00"
+}

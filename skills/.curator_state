@@ -1,0 +1,9 @@
+{
+  "last_report_path": "/home/opc/.hermes/logs/curator/20261005-161635",
+  "last_run_at": "2026-10-05T16:16:35.495343+00:00",
+  "last_run_duration_seconds": 0.252062,
+  "last_run_summary": "auto: no changes; llm: skipped (consolidation off)",
+  "last_run_summary_shown_at": "2026-09-21T14:27:31.266405+00:00",
+  "paused": false,
+  "run_count": 2
+}
